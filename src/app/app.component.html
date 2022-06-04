@@ -1,0 +1,68 @@
+<div class="container">
+  <h1>Formulario de Socios</h1>
+  <form class="example-form" [formGroup]="formulario" (submit)="registrar()">
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput placeholder="Nombre" id="nombre" formControlName="nombre">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Apellidos</mat-label>
+      <input matInput placeholder="Apellidos" value="" formControlName="apellidos">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Número de Socio</mat-label>
+      <input matInput type="number" formControlName="nsocio">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>DNI</mat-label>
+      <input matInput placeholder="DNI" value="" formControlName="DNI">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Teléfono</mat-label>
+      <input matInput placeholder="telefono" value="" formControlName="telefono">
+    </mat-form-field>
+
+    <label id="example-radio-group-label">Sexo</label>
+    <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" formControlName="sexo">
+      <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+        {{season}}
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <button mat-raised-button color="primary" type="submit">Registrar</button>
+  </form>
+
+  <div>
+    <br>
+    <br>
+    <h1>Registro de socios</h1>
+    <ul>
+      <li *ngFor="let socio of socioArray;let i = index" class="lista">
+        <div *ngIf="idEditar == i" class="separar">
+          <div>{{formulario.value.nombre}}</div>
+          <div>{{formulario.value.apellidos}}</div>
+          <div>{{formulario.value.nsocio}}</div>
+          <div>{{formulario.value.DNI}}</div>
+          <div>{{formulario.value.telefono}}</div>
+          <div>{{formulario.value.sexo}}</div>
+        </div>
+        <div *ngIf="idEditar != i" class="separar">
+          <div>{{socio.getNombre()}}</div>
+          <div>{{socio.getApellidos()}}</div>
+          <div>{{socio.getNsocio()}}</div>
+          <div>{{socio.getDNI()}}</div>
+          <div>{{socio.getTelefono()}}</div>
+          <div>{{socio.getSexo()}}</div>
+        </div>
+        <button mat-raised-button color="primary" class="boton" (click)="modificar(i)">Modificar</button> <button
+          mat-raised-button color="warn" class="boton" (click)="eliminar(i)">Eliminar</button>
+      </li>
+    </ul>
+  </div>
+
+</div>
